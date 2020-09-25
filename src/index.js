@@ -4,11 +4,33 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+class Toggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isToggleOn: true};
+
+        // This binding is necessary to make `this` work in the callback
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleClick}>
+                {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
+        );
+    }
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Toggle />,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
